@@ -1,0 +1,62 @@
+.gallery-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;  /* dynamic viewport width */
+  height: 100dvh; /* dynamic viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.gallery-controls button {
+  background: none; /* removes default white background */
+  border: none;     /* removes default black border */
+  visibility: hidden;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Positioning (same as before) */
+.gallery-controls button.prev {
+  left: 0.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-controls button.next {
+  right: 0.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-controls button.close {
+  top: 3rem;
+  right: 0.25rem;
+  font-size: 2rem;
+}
+
+.fade {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade.hidden {
+  opacity: 0;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Merry Christmas!</title>
+  <link rel="icon" type="image/png" href="Media/Photos/Public/favicon.png">
+
+  <link rel="stylesheet" href="css/theme-christmas.css" />
+  <link rel="stylesheet" href="css/presents.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/controls.css" />
+
+  <script defer src="js/gallery.js"></script>
+  <script defer src="js/present.js"></script>
+  <script defer src="js/decryption.js"></script>
+  <script defer src="js/spawnObjects.js"></script>
+  <script defer src="js/firePlace.js"></script>
+  <script src="js/audioPlayer.js" defer></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <!-- Popup Modal -->
+  <div id="popup-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Prove who you are by answering this riddle:</h2>
+      <img src="Media/Photos/Public/IMG_3196.png" alt="Riddle Image" class="modal-image" />
+      <p class="riddle-text">How does she smell?</p>
+      <input type="text" id="riddle-answer" placeholder="Your answer here" />
+      <button id="submit-answer">Submit</button>
+      <p id="feedback" class="feedback-text"></p>
+    </div>
+  </div>
+
+    <!-- Audio controls top-left -->
+  <div id="audio-controls-container" style="display: none;">
+    <button id="next-song-btn" type="button">Next Song</button>
+    <select id="song-select" title="Choose a song"></select>
+  </div>
+
+  <audio id="bg-music" preload="auto" hidden></audio>
+
+  <!-- Snow speed slider -->
+  <div id="snowSliderContainer" style="display: none;">
+    <label for="snowSlider" id="snowSliderLabel">❄️ Intensity</label>
+    <input type="range" id="snowSlider" min="0" max="100"/>
+  </div>
+
+  <!-- Card -->
+  <div id="card-wrapper" style="display: none;">
+    <div id="card" class="step-0">
+      <div id="card-front" class="card-face front">
+        <div class="fireplace-header">
+          <h1>Have a Cozy Christmas</h1>
+        </div>
+
+        <video
+          class="fireplace-video" muted autoplay loop playsinline preload="auto">
+          <source src="Media/Video/Fireplace.mp4" type="video/mp4" />
+        </video>
+        <audio id="fireplaceAudio" src="Media/Audio/Effects/fire-crackling.m4a" preload="auto"></audio>
+
+        <p>Swipe to open the card</p>
+      </div>
+      <div id="card-inside" class="card-face inside">
+        <h2> Merry Christmas Kelly!!! </h2>
+        <p>I can't wait to spend every Christmas with you. Open the presents 
+          as proof we'll always be together for the holidays.</p>
+        <div class="signature">
+          <div class="line1">Love,</div>
+          <div class="line2">  Evan</div>
+        </div>
+        <div id="presents-container">
+          <img id="tree" src="Media/Photos/Public/Tree.png" alt="Christmas Tree">
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="gallery-container" class="gallery-container" style="display: none;">
+    <div class="gallery-controls">
+      <button class="prev">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

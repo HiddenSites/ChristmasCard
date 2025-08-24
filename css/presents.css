@@ -1,0 +1,607 @@
+/* --- Generic Present Container --- */
+.present {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  margin: 0.625rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* --- Box Base --- */
+.present .box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--present-color, #d32f2f);
+  border-radius: var(--border-radius, 0.5rem);
+  box-shadow: var(--box-shadow, 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4));
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Lid and Ribbon move up together */
+.present.has-lid .lid {
+  position: absolute;
+  width: 102%;
+  left: -1%;
+  height: 20%;
+  background: var(--lid-color, #b71c1c);
+  border-radius: var(--lid-radius, 0.2rem 0.2rem 0 0);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  transition: transform 1s ease, opacity 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ribbon on lid moves with lid */
+.present.has-lid .ribbon.ribbon-on-lid {
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+/* When opened, lid (and ribbon) lift up and fade slightly */
+.present.opened.has-lid .lid,
+.present.opened.has-lid .ribbon.ribbon-on-lid {
+  transform: translateY(-150%);
+  opacity: 0.8;
+}
+
+
+/* Base Ribbon */
+.ribbon {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* --- CLASSIC RIBBON STYLE --- */
+.ribbon.classic {
+  width: 2rem;
+  height: 1rem;
+  background-color: var(--ribbon-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3);
+}
+
+.ribbon.classic::before,
+.ribbon.classic::after {
+  content: '';
+  position: absolute;
+  top: 0.6rem;
+  width: 0.5rem;
+  height: 0.7rem;
+  background-color: var(--ribbon-color);
+  transform-origin: top left;
+}
+
+.ribbon.classic::before {
+  left: 0.1rem;
+  transform: rotate(45deg);
+}
+
+.ribbon.classic::after {
+  right: 0.1rem;
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+
+.ribbon.starburst {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: var(--ribbon-color);
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: inset 0 0 0.2rem #fff5, 0 0 0.3rem rgba(0, 0, 0, 0.3);
+}
+
+.ribbon.starburst::before,
+.ribbon.starburst::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.8rem;
+  height: 0.3rem;
+  background: var(--ribbon-color);
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 0.1rem;
+  opacity: 0.8;
+}
+
+.ribbon.starburst::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* --- Classic Rounded Red --- */
+.present.classic-red {
+  --present-color: #d32f2f;
+  --lid-color: #b71c1c;
+  --ribbon-color: gold;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.3);
+}
+
+/* --- Sleek Blue with Sharp Corners --- */
+.present.sleek-blue-sharp {
+  --present-color: linear-gradient(135deg, #1565c0, #1e88e5);
+  --lid-color: #0d47a1;
+  --ribbon-color: silver;
+  --border-radius: 0.1rem;
+  --box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.5);
+}
+
+/* --- Playful Striped Green --- */
+.present.playful-green-stripes {
+  --present-color: repeating-linear-gradient(
+    45deg,
+    #388e3c,
+    #388e3c 0.5rem,
+    #66bb6a 0.5rem,
+    #66bb6a 1rem
+  );
+  --lid-color: #2e7d32;
+  --ribbon-color: red;
+  --border-radius: 0.5rem;
+  --box-shadow: inset 0 0 0.3rem #1b5e20, 0 0.4rem 0.7rem rgba(0, 0, 0, 0.4);
+}
+
+/* --- Candy Cane Stripes --- */
+.present.candy-cane-stripes {
+  --present-color: repeating-linear-gradient(
+    45deg,
+    #ffffff,
+    #ffffff 0.5rem,
+    #e53935 0.5rem,
+    #e53935 1rem
+  );
+  --lid-color: #c62828;
+  --ribbon-color: green;
+  --border-radius: 0.4rem;
+  --box-shadow: 0 0.4rem 0.6rem rgba(255, 0, 0, 0.4);
+}
+
+/* --- Polka Dot Green Large --- */
+.present.green-polka-large {
+  --present-color: radial-gradient(#ffffff 20%, transparent 21%) center/1.5rem 1.5rem,
+                   #388e3c;
+  --lid-color: #2e7d32;
+  --ribbon-color: gold;
+  --border-radius: 0.6rem;
+  --box-shadow: 0 0.4rem 0.6rem rgba(0, 100, 0, 0.4);
+}
+
+/* --- Snowy Blue Night --- */
+.present.snowy-blue-night {
+  --present-color: radial-gradient(white 2%, transparent 3%) repeat,
+                   linear-gradient(135deg, #0d47a1, #1976d2);
+  --lid-color: #0d47a1;
+  --ribbon-color: silver;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 0.7rem rgba(0, 0, 50, 0.5);
+  background-size: 0.3rem 0.3rem;
+}
+
+/* --- Elf Green with Horizontal Stripes --- */
+.present.elf-green-horizontal {
+  --present-color: repeating-linear-gradient(
+    0deg,
+    #43a047,
+    #43a047 0.4rem,
+    #66bb6a 0.4rem,
+    #66bb6a 0.8rem
+  );
+  --lid-color: #2e7d32;
+  --ribbon-color: red;
+  --border-radius: 0.3rem;
+  --box-shadow: inset 0 0 0.2rem #1b5e20, 0 0.3rem 0.5rem rgba(0, 100, 0, 0.4);
+}
+
+/* --- Winter Mint Swirl --- */
+.present.winter-mint-swirl {
+  --present-color: linear-gradient(135deg, #b2ff59, #69f0ae);
+  --lid-color: #00c853;
+  --ribbon-color: crimson;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.4rem 0.7rem rgba(0, 100, 50, 0.3);
+}
+
+/* --- Big Cranberry Polka (More dots, less spacing) --- */
+.present.big-cranberry-polka {
+  --present-color: radial-gradient(#f1f8e9 20%, transparent 21%) center/1.2rem 1.2rem,
+                   #880e4f;
+  --lid-color: #6a1b47;
+  --ribbon-color: #ffe082;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.4rem 0.6rem rgba(130, 0, 60, 0.4);
+}
+
+/* --- Soft Aqua Grid --- */
+.present.soft-aqua-grid {
+  --present-color: repeating-linear-gradient(
+      0deg,
+      #e0f7fa,
+      #e0f7fa 0.6rem,
+      #b2ebf2 0.6rem,
+      #b2ebf2 1.2rem
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #e0f7fa,
+      #e0f7fa 0.6rem,
+      #b2ebf2 0.6rem,
+      #b2ebf2 1.2rem
+    );
+  --lid-color: #80deea;
+  --ribbon-color: #cfd8dc;
+  --border-radius: 0.3rem;
+  --box-shadow: 0 0.4rem 0.5rem rgba(0, 80, 100, 0.3);
+  background-blend-mode: multiply;
+}
+
+/* --- Berry Ombre --- */
+.present.berry-ombre {
+  --present-color: linear-gradient(135deg, #ad1457, #f06292);
+  --lid-color: #880e4f;
+  --ribbon-color: #ffeb3b;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.3rem 0.6rem rgba(100, 0, 50, 0.3);
+}
+
+/* --- Festive Pinwheel --- */
+.present.festive-pinwheel {
+  --present-color: conic-gradient(
+    from 0deg,
+    #ffcc80 0deg 60deg,
+    #d32f2f 60deg 120deg,
+    #ffcc80 120deg 180deg,
+    #d32f2f 180deg 240deg,
+    #ffcc80 240deg 300deg,
+    #d32f2f 300deg 360deg
+  );
+  --lid-color: #c62828;
+  --ribbon-color: #ffd54f;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 0.6rem rgba(150, 0, 0, 0.3);
+}
+
+/* --- Icy Blue Gradient --- */
+.present.icy-blue-gradient {
+  --present-color: linear-gradient(135deg, #e1f5fe, #81d4fa, #29b6f6);
+  --lid-color: #0288d1;
+  --ribbon-color: white;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 0.7rem rgba(0, 80, 160, 0.4);
+}
+
+/* --- Red & Gold Diagonal Stripes --- */
+.present.red-gold-stripes {
+  --present-color: repeating-linear-gradient(
+    45deg,
+    #b71c1c,
+    #b71c1c 0.4rem,
+    #ffd54f 0.4rem,
+    #ffd54f 0.8rem
+  );
+  --lid-color: #7f0000;
+  --ribbon-color: #fbc02d;
+  --border-radius: 0.4rem;
+  --box-shadow: 0 0.5rem 0.7rem rgba(150, 0, 0, 0.5);
+}
+
+/* --- NEW Style 19: Creamy White with Green Dots --- */
+.present.creamy-green-polka {
+  --present-color: radial-gradient(#388e3c 20%, transparent 21%) center/1.2rem 1.2rem,
+                   #f3f0e8;
+  --lid-color: #cfd8dc;
+  --ribbon-color: #388e3c;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.3rem 0.5rem rgba(100, 120, 100, 0.3);
+}
+
+/* --- Charlie Stripes --- */
+.present.charlie-stripes {
+  --present-color: repeating-linear-gradient(
+    45deg,
+    #6d4c41,    /* dark brown stripes */
+    #6d4c41 1rem,
+    #ffeb3b,    /* bright yellow stripes */
+    #ffeb3b 2rem
+  );
+  --lid-color: #5d4037; /* darker brown lid */
+  --ribbon-color: #fbc02d; /* golden ribbon */
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 0.6rem rgba(93, 64, 55, 0.6);
+}
+
+.present.games-pixels {
+  --px: 2px; /* pixel size */
+
+  /* Grid overlay + colored rows */
+  --present-color:
+    /* vertical grid line every --px */
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.10) 0 1px, transparent 1px var(--px)),
+    /* horizontal grid line every --px */
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.10) 0 1px, transparent 1px var(--px)),
+    /* repeating color bands (10 rows) */
+    repeating-linear-gradient(
+      0deg,
+      #ff4d00 0 calc(var(--px) * 1),    /* lava red */
+      #ffcc00 calc(var(--px) * 1) calc(var(--px) * 2),  /* coin gold */
+      #00cc00 calc(var(--px) * 2) calc(var(--px) * 3),  /* slime green */
+      #00aaff calc(var(--px) * 3) calc(var(--px) * 4),  /* sky blue */
+      #aa00ff calc(var(--px) * 4) calc(var(--px) * 5),  /* magic purple */
+      #ff77aa calc(var(--px) * 5) calc(var(--px) * 6),  /* candy pink */
+      #ffaa00 calc(var(--px) * 6) calc(var(--px) * 7),  /* orange pixel */
+      #00ffaa calc(var(--px) * 7) calc(var(--px) * 8),  /* neon aqua */
+      #0044ff calc(var(--px) * 8) calc(var(--px) * 9),  /* deep blue */
+      #ffffff calc(var(--px) * 9) calc(var(--px) * 10)  /* bright white */
+    );
+
+  /* Lid and ribbon */
+  --lid-color: #d4af37; /* metallic gold */
+  --ribbon-color: #ff0000; /* bold red for contrast */
+
+  /* Shape & shadow */
+  --border-radius: 0.3rem;
+  --box-shadow: 0 0.5rem 0.7rem rgba(0, 0, 0, 0.35);
+}
+
+
+/* --- Gremlin Splatter --- */
+.present.gremlin-splatter {
+  --present-color:
+    radial-gradient(circle at 20% 30%, #8e24aa 10%, transparent 11%),
+    radial-gradient(circle at 70% 70%, #43a047 8%, transparent 9%);
+  background-color: #6a1b9a;
+  background-repeat: no-repeat;
+  --lid-color: #4a148c;
+  --ribbon-color: #c5e1a5;
+  --border-radius: 0.4rem;
+  --box-shadow: 0 0.5rem 0.8rem rgba(106, 27, 154, 0.7);
+  animation: gremlinShake 1.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes gremlinShake {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  8%   { transform: translate(-4px, 3px) rotate(-2deg); }
+  16%  { transform: translate(6px, -4px) rotate(3deg); }
+  24%  { transform: translate(-7px, 4px) rotate(-4deg); }
+  32%  { transform: translate(8px, 0px) rotate(3deg); }
+  40%  { transform: translate(-6px, -3px) rotate(-3deg); }
+  52%  { transform: translate(7px, 3px) rotate(4deg); }
+  64%  { transform: translate(-5px, -4px) rotate(-3deg); }
+  76%  { transform: translate(6px, 4px) rotate(3deg); }
+  88%  { transform: translate(-3px, 2px) rotate(-1.5deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+
+/* --- Grinch Fur --- */
+.present.grinch-fur {
+  --present-color:
+    radial-gradient(circle at 30% 30%, #b9e1b9 20%, transparent 21%), /* lighter green */
+    radial-gradient(circle at 70% 70%, #d64a4a 15%, transparent 16%); /* lighter red */
+  background-color: #4caf50; /* lighter background green */
+  box-shadow: inset 0 0 6px #2e7d32;
+  --lid-color: #388e3c;
+  --ribbon-color: #e57373;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.6rem 0.8rem rgba(76, 175, 80, 0.5);
+}
+
+/* --- Muppets Confetti --- */
+.present.muppets-confetti {
+  --present-color: repeating-conic-gradient(
+    from 0deg,
+    #ff1744 0deg 30deg,
+    #00e676 30deg 60deg,
+    #2979ff 60deg 90deg,
+    #ffea00 90deg 120deg,
+    #ff1744 120deg 150deg,
+    #00e676 150deg 180deg
+  );
+  --lid-color: #c51162;
+  --ribbon-color: #00c853;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 0.7rem rgba(255, 23, 68, 0.5);
+}
+
+
+/* --- TV Present (Gingerbread Plaid) --- */
+.present.tv-set {
+  /* Gingerbread plaid wrapping */
+  --present-color:
+    /* faint sugar threads */
+    linear-gradient(0deg, rgba(255,255,255,0.05) 50%, transparent 50%) 0 0 / 100% 8px,
+    linear-gradient(90deg, rgba(255,255,255,0.05) 50%, transparent 50%) 0 0 / 8px 100%,
+    /* brown plaid bands */
+    repeating-linear-gradient(90deg, #5a2d0c 0 6px, #7a3f14 6px 12px, #5a2d0c 12px 18px),
+    /* THICK icing horizontal stripes */
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.95) 0 4px, transparent 4px 20px),
+    /* THICK icing vertical stripes */
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.95) 0 4px, transparent 4px 20px),
+    /* gingerbread cookie base */
+    linear-gradient(135deg, #8b4513, #5c2f0d);
+
+  --lid-color: #111;      
+  --border-radius: 0.4rem;
+  --box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.5);
+
+  position: relative;
+  border-radius: var(--border-radius);
+}
+
+/* Antennas (same behavior/structure as your working version) */
+.present.tv-set::before,
+.present.tv-set::after {
+  content: "";
+  position: absolute;
+  width: 0.4rem;
+  height: 2.5rem;
+  background: var(--present-color); /* same wrap as body */
+  top: -2.3rem;
+  border-radius: 0.2rem;
+}
+
+.present.tv-set::before {
+  left: 35%;
+  transform: rotate(-20deg);
+}
+
+.present.tv-set::after {
+  right: 35%;
+  transform: rotate(20deg);
+}
+
+/* Let waves render outside the box */
+.present.tv-set .box { overflow: visible; }
+
+/* Simple signal waves (one emitter per antenna) */
+.present.tv-set .box::before,
+.present.tv-set .box::after {
+  content: "";
+  position: absolute;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  top: -2.6rem;
+
+  /* start small, grow + fade */
+  animation: tvWave 1.2s ease-out infinite;
+  transform: translate(-50%, 0) scale(0.4);
+}
+
+/* Left antenna waves (centered near the left antenna tip) */
+.present.tv-set .box::before {
+  left: 32%;
+  border: 2px solid rgba(194, 18, 18, 0.9); /* icing white ring */
+}
+
+/* Right antenna waves (staggered timing) */
+.present.tv-set .box::after {
+  right: 19%;
+  border: 2px solid rgba(37, 133, 34, 0.9); /* icing white ring */
+}
+
+@keyframes tvWave {
+  0%   { transform: translate(-50%, 0) scale(0.4); opacity: 0.9; border-width: 2px; }
+  70%  { opacity: 0.5; }
+  100% { transform: translate(-50%, 0) scale(2.2); opacity: 0; border-width: 1px; }
+}
+
+/* --- Film Reel with Diagonal Stripe Animation --- */
+.present.film-reel-clean {
+  --present-color: repeating-linear-gradient(
+    45deg,
+    #000 0,
+    #000 8%,
+    #222 8%,
+    #222 10%,
+    #fff 10%,
+    #fff 12%
+  );
+  background-blend-mode: multiply;
+  --lid-color: rgba(255, 215, 0, 0.95);
+  --ribbon-color: #e0e0e0;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+/* Animated diagonal shine overlay */
+.present.film-reel-clean::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: shine 6s linear infinite;
+  pointer-events: none;
+  border-radius: var(--border-radius);
+}
+
+/* Optional subtle horizontal frame lines */
+.present.film-reel-clean::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.1) 0px,
+    rgba(0,0,0,0.1) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  pointer-events: none;
+  border-radius: var(--border-radius);
+}
+
+@keyframes shine {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+.message-box {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff8e1;
+  border: 2px solid #d32f2f;
+  border-radius: 10px;
+  padding: 15px 20px;
+  z-index: 99999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  max-width: 300px;
+}
+
+.message-box p {
+  margin: 0 0 10px;
+  color: #b71c1c;
+  font-weight: bold;
+}
+
+.message-box button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-box button:hover {
+  background: #b71c1c;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}

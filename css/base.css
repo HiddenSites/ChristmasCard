@@ -1,0 +1,235 @@
+/* Reset and base layout */
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background-color: var(--color-body-bg);
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Popup Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: var(--color-modal-overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* above everything */
+}
+
+/* Popup Content */
+.modal-content {
+  background: var(--color-modal-content-bg);
+  padding: 2rem;
+  border-radius: 15px;
+  max-height: 80dvh;
+  max-width: 320px;
+  width: 90vw;
+  box-shadow: 0 4px 20px var(--color-shadow-medium);
+  text-align: center;
+}
+
+.modal-image {
+  max-width: 60%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.riddle-text {
+  font-size: 1.5rem; /* Adjust as needed — 1.5rem is a good readable size */
+}
+
+#riddle-answer {
+  width: 90%;
+  max-width: 300px;
+  padding: 0.6rem 0.8rem;
+  margin: 1rem auto 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-default);
+  font-size: 1rem;
+  display: block;
+}
+
+#submit-answer {
+  background-color: var(--color-btn-bg);
+  border: none;
+  color: var(--color-btn-text);
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#submit-answer:hover {
+  background-color: var(--color-btn-bg-hover);
+}
+
+.feedback-text {
+  color: var(--color-feedback-error);
+  margin-top: 0.5rem;
+  min-height: 1.2rem; /* reserve space for error message */
+  font-weight: bold;
+}
+
+/* Card wrapper holds the 3D perspective */
+#card-wrapper {
+  perspective: 1000px;
+  width: 90vw;
+  max-width: 400px;
+  height: 80dvh;
+  max-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The card itself flips */
+#card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  position: relative;
+  cursor: grab;
+}
+
+#card.open {
+  transform: rotateY(-180deg);
+}
+
+/* Card face styling */
+.card-face {
+  border: 2px solid var(--color-gold-border);
+  border-radius: 20px;
+  background-color: var(--color-card-face-bg);
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.front {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.fireplace-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.fireplace-video {
+  width: 90%;               /* Almost the full width of the card */
+  max-width: 500px;         /* Optional: prevent it from getting too huge on wide screens */
+  display: block;           /* Ensure it's treated like a block element */
+  border-radius: 16px;      /* Smooth, rounded corners */
+}
+
+#card-front p {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.inside {
+  transform: rotateY(-180deg);
+  background-color: var(--color-card-inside-bg);
+
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Style the inside of the card */
+#card-inside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  color: var(--color-text-default); /* use your theme text color */
+  overflow: hidden; /* prevent scrollbars */
+}
+
+#card-inside > h2,
+#card-inside > p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* clean & readable */
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  user-select: none;
+}
+
+#card-inside > h2 {
+  font-size: 1.5rem;
+}
+
+#card-inside > p {
+  font-size: 1rem;
+}
+
+#card-inside > .signature {
+  font-family: 'Pacifico', 'Brush Script MT', cursive;
+  font-size: 1.2rem;
+  position: absolute;
+  bottom: 65%;   /* distance from the bottom edge */
+  right: 2.5rem;    /* distance from the right edge */
+  user-select: none;
+}
+
+.signature .line1,
+.signature .line2 {
+  display: block;
+}
+
+.signature .line2 {
+  margin-left: 1.5em;       /* signature-style indent */
+}
+
+/* Presents container fills most of the card */
+#presents-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#tree {
+  position: absolute;
+  top: -10%;       /* adjust this to control vertical placement */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25rem;  /* or % or vw, depending on layout */
+  max-width: 90%;
+  pointer-events: none; /* So clicks go to presents behind it */
+}

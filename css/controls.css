@@ -1,0 +1,100 @@
+/* Audio controls container */
+#audio-controls-container {
+  position: fixed;
+  top: 0.2em;
+  left: 0.2em;
+  z-index: 10000;
+  background: var(--color-card-inside-bg);
+  padding: 0.3em 0.6em;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  box-shadow: 0 0 0.3em var(--color-audio-border);
+  backdrop-filter: blur(5px);
+  font-family: sans-serif;
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-btn-text);
+}
+
+/* Next song button */
+#next-song-btn {
+  background-color: var(--color-audio-btn-bg);
+  border: none;
+  color: var(--color-btn-text);
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0.25em 0.6em;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid var(--color-gold-border);
+  transition: background-color 0.3s ease;
+}
+
+#next-song-btn:hover {
+  background-color: var(--color-audio-btn-bg-hover);
+}
+
+/* Active state fix for mobile (forces repaint with transform) */
+#next-song-btn:active {
+  transform: translateZ(0);
+  background-color: var(--color-audio-btn-bg-hover);
+}
+
+/* Song select dropdown */
+#song-select {
+  font-size: 0.9rem;
+  padding: 0.25em 0.4em;
+  border: 1px solid var(--color-gold-border);
+  border-radius: 5px;
+  background-color: var(--color-audio-btn-bg); /* match button */
+  color: var(--color-btn-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  transform: translateY(0.04rem);
+}
+
+#song-select:hover {
+  background-color: var(--color-audio-btn-bg-hover); /* match button hover */
+  color: var(--color-btn-text);
+  border-color: var(--color-gold-border);
+}
+
+#snowSliderContainer {
+  position: fixed;
+  top: 0.2em;
+  right: 0.2em;
+  z-index: 10000;
+  padding: 0.3em;
+  margin: 0;
+  width: 7em;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-speed-slider-bg);
+  border: 1px solid var(--color-speed-slider-border);
+  border-radius: 0.5em;
+  box-shadow: 0 0 0.3em var(--color-speed-slider-border);
+  backdrop-filter: blur(2px);
+  font-size: 0.75em;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+#snowSliderLabel {
+  margin-bottom: 0.2em;
+  color: var(--color-speed-label-text);
+  font-weight: bold;
+  text-align: center;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+#snowSlider {
+  width: 100%;
+  height: 0.6em;
+  margin: 0;
+  accent-color: var(--color-speed-slider-accent);
+  background: transparent;
+  cursor: pointer;
+}

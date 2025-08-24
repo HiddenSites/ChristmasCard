@@ -1,0 +1,71 @@
+:root {
+  /* Backgrounds */
+  --color-body-bg: #d2b48c;
+  --color-card-face-bg: #b33a3a;        /* warm cranberry red for card front */
+  --color-card-inside-bg: #fbe9ec;      /* very light pinkish cream inside card */
+  --color-modal-overlay-bg: rgba(0, 0, 0, 0.4);  /* softer overlay so less dark */
+  --color-modal-content-bg: #fffdf8;    /* soft off-white modal background */
+  --color-controls-bg: rgba(255, 255, 255, 0.85); /* bright but subtle controls bg */
+  --color-select-bg: #ffffff;            /* pure white for selects */
+  --color-pastel-pink-bg: rgba(255, 192, 203, 0.2); /* pastel pink for accents */
+
+  --color-gold-border: #d4af37; /* classic warm gold */
+  --color-gold-border-shadow: rgba(212, 175, 55, 0.7);
+
+  --color-festive-green: #2c5f2d; /* deep pine green */
+
+  /* Text Colors */
+  --color-text-default: #2c1503;         /* dark brown, softer than black */
+  --color-btn-text: #ffffff;              /* white text on buttons */
+  --color-soft-magenta: #d87ca6;          /* pink-magenta accent */
+  --color-feedback-error: #d32f2f;        /* rich red for errors */
+
+  /* Buttons and borders */
+  --color-btn-bg: #c62828;                /* bright but not too dark red */
+  --color-btn-bg-hover: #8e0000;          /* deep red on hover */
+  --color-border-default: #d9b6b6;        /* soft dusty pinkish border */
+  --color-pastel-pink-border: rgba(255, 182, 193, 0.5); /* pastel pink */
+
+  /* Shadows */
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-shadow-medium: rgba(0, 0, 0, 0.2);
+  --color-shadow-soft: rgba(0, 0, 0, 0.1);
+
+  /* Accent */
+  --color-pastel-pink: #ffb6c1;
+
+  /* Snow speed label and slider */
+  --color-speed-label-text: #4a90e2;              /* calm blue */
+  --color-speed-slider-bg: rgba(173, 216, 230, 0.3); /* light icy blue */
+  --color-speed-slider-accent: #5dade2;            /* bright blue knob */
+  --color-speed-slider-border: rgba(90, 130, 180, 0.5); /* soft icy blue border */
+
+  --color-audio-bg: #7F1D1D;           /* Deep cranberry red */
+  --color-audio-border: #A85C00;       /* Warm golden amber */
+  --color-audio-btn-bg: #2D6B2D;
+  --color-audio-btn-bg-hover: #3B803B;
+  --color-btn-text: #FAF3E0;            /* Creamy off-white */
+  --color-select-bg: #3E1F00;           /* Dark cocoa brown */
+  --color-border-default: #A85C00;      /* Same warm amber */
+
+  /* Video shadow */
+  --color-video-shadow: rgba(0, 0, 0, 0.25);
+
+  /* Card shadow */
+  --color-card-shadow: rgba(0, 0, 0, 0.15);
+
+  /* Card inside background */
+  --color-card-inside-bg: #e8dccc;
+
+  /* Modal shadow */
+  --color-modal-shadow: rgba(0, 0, 0, 0.15);
+
+  /* Gallery shadow */
+  --color-gallery-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Input border */
+  --color-input-border: #d9b6b6;
+
+  /* Feedback text */
+  --color-feedback-text: #d32f2f;
+}
