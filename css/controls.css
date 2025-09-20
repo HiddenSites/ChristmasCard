@@ -20,7 +20,7 @@
   border: 1px solid var(--color-gold-border);
   color: var(--color-btn-text);
 
-  max-width: calc(100vw - var(--snow-slider-width) - 0.5em);
+  max-width: calc(100vw - var(--snow-slider-width));
   width: auto;
   box-sizing: border-box;
 }
@@ -37,16 +37,6 @@
   cursor: pointer;
   border: 1px solid var(--color-gold-border);
   transition: background-color 0.3s ease;
-}
-
-#next-song-btn:hover {
-  background-color: var(--color-audio-btn-bg-hover);
-}
-
-/* Active state fix for mobile (forces repaint with transform) */
-#next-song-btn:active {
-  transform: translateZ(0);
-  background-color: var(--color-audio-btn-bg-hover);
 }
 
 /* Song select dropdown */
@@ -66,12 +56,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-#song-select:hover {
-  background-color: var(--color-audio-btn-bg-hover); /* match button hover */
-  color: var(--color-btn-text);
-  border-color: var(--color-gold-border);
 }
 
 #snowSliderContainer {
