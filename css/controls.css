@@ -1,3 +1,7 @@
+:root {
+  --snow-slider-width: 7em;
+}
+
 /* Audio controls container */
 #audio-controls-container {
   position: fixed;
@@ -15,6 +19,10 @@
   font-family: sans-serif;
   border: 1px solid var(--color-gold-border);
   color: var(--color-btn-text);
+
+  max-width: calc(100vw - var(--snow-slider-width) - 0.5em);
+  width: auto;
+  box-sizing: border-box;
 }
 
 /* Next song button */
@@ -53,7 +61,8 @@
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  max-width: 8em;
+  flex: 1 1 auto;
+  min-width: 6em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -72,7 +81,7 @@
   z-index: 10000;
   padding: 0.3em;
   margin: 0;
-  width: 7em;
+  width: var(--snow-slider-width);
   height: auto;
   display: flex;
   flex-direction: column;
