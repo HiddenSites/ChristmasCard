@@ -8,6 +8,7 @@ const SOUND_PAPER_TEAR = `${EFFECTS_FOLDER}paper-torn.mp3`;
 class Present {
   static totalUnlocked = 0;
   static presents = [];
+  static allPresentsOpened = false;
 
   constructor({
     folder,
@@ -23,6 +24,12 @@ class Present {
     ribbonStyle = 'classic',
     x = null, y = null
   }) {
+
+    // Force unlocked if all presents have been opened before
+    if (Present.allPresentsOpened) {
+      locked = false;
+    }
+
     this.folder = folder;
     this.locked = locked;
     this.triggerItems = triggerItems;
@@ -146,7 +153,10 @@ class Present {
     this.element.remove();
     Present.presents = Present.presents.filter(p => p !== this);
 
-    if (!this.locked) {
+    if (this.locked) {
+      this.locked = false;
+      Present.totalUnlocked++;
+    } else {
       Present.totalUnlocked--;
     }
   }
@@ -161,6 +171,7 @@ class Present {
       for (let i = 0; i < 100; i++){
         spawnSnow();
       }
+      Present.allPresentsOpened = true;
       createPresents();
       return true;
     }

@@ -99,11 +99,11 @@ class AudioPlayer {
 
     this.playlist.forEach((filename, index) => {
       const name = filename.replace(/\.mp3$/i, "");
-      const displayName = name.length > CHARLIMIT ? name.slice(0, CHARLIMIT) : name;
 
       const option = document.createElement("option");
       option.value = index;
-      option.textContent = displayName;
+      option.textContent = name; // Use full name
+      option.title = name;       // Tooltip for full name
       this.dropdown.appendChild(option);
     });
   }
@@ -171,7 +171,7 @@ class AudioPlayer {
         option.value = this.currentIndex;
 
         const name = filename.replace(/\.mp3$/i, "");
-        const displayName = name.length > CHARLIMIT ? name.slice(0, CHARLIMIT) + "…" : name;
+        const displayName = name;
 
         option.textContent = displayName;
         this.dropdown.appendChild(option);
