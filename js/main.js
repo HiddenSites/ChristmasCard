@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "Media/Audio/Music",
     ["Mele Kalikimaka.mp3", "Mr Grinch.mp3", "Rudolph.mp3", 
       "It Feels Like Christmas.mp3", "Alvin and the Chipmunks.mp3"],  // these songs will always be last
-    ["LIGHTS ON.mp3", "Snowman.mp3"]
+    ["All I Want For Christmas Is You.mp3", "Santa Tell Me.mp3"] // these songs will always be first
     );
 
   // Hide main card initially

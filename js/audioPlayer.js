@@ -1,4 +1,4 @@
-const CHARLIMIT = 18;
+const CHARLIMIT = 22;
 
 class AudioPlayer {
   constructor(audioSelector, nextBtnSelector, dropdownSelector, playlistUrl, basePath, hiddenSongs = [], firstSongs = null) {
