@@ -491,7 +491,7 @@
 
 /* Right antenna waves (staggered timing) */
 .present.tv-set .box::after {
-  right: 19%;
+  right: 18.5%;
   border: 2px solid rgba(37, 133, 34, 0.9); /* icing white ring */
 }
 

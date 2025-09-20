@@ -1,4 +1,4 @@
-const CHARLIMIT = 22;
+const CHARLIMIT = 25;
 
 class AudioPlayer {
   constructor(audioSelector, nextBtnSelector, dropdownSelector, playlistUrl, basePath, hiddenSongs = [], firstSongs = null) {
@@ -99,7 +99,7 @@ class AudioPlayer {
 
     this.playlist.forEach((filename, index) => {
       const name = filename.replace(/\.mp3$/i, "");
-      const displayName = name.length > CHARLIMIT ? name.slice(0, CHARLIMIT) + "…" : name;
+      const displayName = name.length > CHARLIMIT ? name.slice(0, CHARLIMIT) : name;
 
       const option = document.createElement("option");
       option.value = index;
