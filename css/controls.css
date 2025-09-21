@@ -37,6 +37,8 @@
   cursor: pointer;
   border: 1px solid var(--color-gold-border);
   transition: background-color 0.3s ease;
+
+  flex: 0 0 auto; /* button never shrinks or grows */
 }
 
 /* Song select dropdown */
@@ -51,13 +53,15 @@
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  flex: 1 1 auto;
-  min-width: 6em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex: 1 1 auto;          /* fill remaining space only */
+  min-width: 0;            /* allow shrinking */
+  max-width: 100%;         /* prevent overflow */
+  overflow: hidden;        /* truncate long names */
+  text-overflow: ellipsis; /* … at the end */
+  white-space: nowrap;     /* keep on one line */
 }
 
+/* Snow slider container */
 #snowSliderContainer {
   position: fixed;
   top: 0.2em;
