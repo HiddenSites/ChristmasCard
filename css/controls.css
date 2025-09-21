@@ -43,7 +43,7 @@
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  max-width: 16em;
+  max-width: 14em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
