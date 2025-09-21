@@ -53,8 +53,8 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
-
-  max-width: calc(100% - 3.5em); /* leave space for button */
+  height: 2.5em;
+  width: calc(100% - 5em); /* leave space for button */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
