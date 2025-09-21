@@ -53,8 +53,7 @@
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  flex: 1 1 auto;
-  max-width: calc(100% - 4em); /* leave space for button */
+  max-width: calc(100%); /* leave space for button */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
