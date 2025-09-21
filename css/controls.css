@@ -1,5 +1,6 @@
 :root {
   --snow-slider-width: 7em;
+  --audio-container-width: calc(100vw - var(--snow-slider-width));
 }
 
 /* Audio controls container */
@@ -11,24 +12,18 @@
   background: var(--color-card-inside-bg);
   padding: 0.3em 0.6em;
   border-radius: 6px;
-
   display: flex;
   align-items: center;
   gap: 0.5em;
-
   box-shadow: 0 0 0.3em var(--color-audio-border);
   backdrop-filter: blur(5px);
   font-family: sans-serif;
   border: 1px solid var(--color-gold-border);
   color: var(--color-btn-text);
 
-  max-width: calc(100vw - var(--snow-slider-width));
+  max-width: var(--audio-container-width);
   width: auto;
   box-sizing: border-box;
-
-  /* 🔑 force one line */
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 /* Next song button */
@@ -37,38 +32,34 @@
   border: none;
   color: var(--color-btn-text);
   font-weight: bold;
-  font-size: 0.85rem;
-  padding: 0.25em 0.6em;
+  /*font-size: 0.85rem;*/
+  width: 4em;
+  padding: 0.25em;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid var(--color-gold-border);
   transition: background-color 0.3s ease;
-
-  flex: 0 0 auto; /* fixed size, no grow or shrink */
-  white-space: nowrap;
 }
 
 /* Song select dropdown */
 #song-select {
   font-size: 0.9rem;
-  padding: 0.25em 0.4em;
+  padding: 0.25em;
   border: 1px solid var(--color-gold-border);
   border-radius: 5px;
-  background-color: var(--color-audio-btn-bg);
+  background-color: var(--color-audio-btn-bg); /* match button */
   color: var(--color-btn-text);
   cursor: pointer;
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  flex: 1 1 auto;          /* take remaining space */
-  min-width: 0;            /* allow shrinking */
-  max-width: 100%;         /* never overflow */
-  overflow: hidden;        /* hide overflow in collapsed bar */
-  text-overflow: ellipsis; /* … when too long */
-  white-space: nowrap;     /* keep single line */
+  flex: 1 1 auto;
+  max-width: calc(100% - 4em - 0.5em - 0.5em ); /* leave space for button */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Snow slider container */
 #snowSliderContainer {
   position: fixed;
   top: 0.2em;
