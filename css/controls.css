@@ -33,7 +33,8 @@
   color: var(--color-btn-text);
   font-weight: bold;
   /*font-size: 0.85rem;*/
-  width: 5em;
+  width: 4em;
+  height: 2.5em;
   padding: 0.15em;
   border-radius: 5px;
   cursor: pointer;
@@ -53,7 +54,7 @@
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  max-width: calc(100%); /* leave space for button */
+  max-width: calc(100% - 5em); /* leave space for button */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
