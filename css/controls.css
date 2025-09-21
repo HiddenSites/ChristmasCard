@@ -11,9 +11,11 @@
   background: var(--color-card-inside-bg);
   padding: 0.3em 0.6em;
   border-radius: 6px;
+
   display: flex;
   align-items: center;
   gap: 0.5em;
+
   box-shadow: 0 0 0.3em var(--color-audio-border);
   backdrop-filter: blur(5px);
   font-family: sans-serif;
@@ -23,6 +25,10 @@
   max-width: calc(100vw - var(--snow-slider-width));
   width: auto;
   box-sizing: border-box;
+
+  /* 🔑 force one line */
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Next song button */
@@ -38,7 +44,8 @@
   border: 1px solid var(--color-gold-border);
   transition: background-color 0.3s ease;
 
-  flex: 0 0 auto; /* button never shrinks or grows */
+  flex: 0 0 auto; /* fixed size, no grow or shrink */
+  white-space: nowrap;
 }
 
 /* Song select dropdown */
@@ -47,18 +54,18 @@
   padding: 0.25em 0.4em;
   border: 1px solid var(--color-gold-border);
   border-radius: 5px;
-  background-color: var(--color-audio-btn-bg); /* match button */
+  background-color: var(--color-audio-btn-bg);
   color: var(--color-btn-text);
   cursor: pointer;
   transition: background-color 0.3s ease;
   transform: translateY(0.04rem);
 
-  flex: 1 1 auto;          /* fill remaining space only */
+  flex: 1 1 auto;          /* take remaining space */
   min-width: 0;            /* allow shrinking */
-  max-width: 100%;         /* prevent overflow */
-  overflow: hidden;        /* truncate long names */
-  text-overflow: ellipsis; /* … at the end */
-  white-space: nowrap;     /* keep on one line */
+  max-width: 100%;         /* never overflow */
+  overflow: hidden;        /* hide overflow in collapsed bar */
+  text-overflow: ellipsis; /* … when too long */
+  white-space: nowrap;     /* keep single line */
 }
 
 /* Snow slider container */
