@@ -187,7 +187,7 @@ function createPresents() {
   const presents = [
     new Present({ x:'29%', y:'75%', width:'5rem', height:'5rem',
                   folder:'Bass', style:'candy-cane-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
-                  triggerItems:[{song:'Rudolph.mp3'}] }),
+                  triggerItems:[{song:'Rudy the Red Nosed Reindeer.m4a'}] }),
                   
     new Present({ x:'63%', y:'78%', width:'6rem', height:'4rem',
                   folder:'Charlie', style:'charlie-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
