@@ -191,7 +191,7 @@ function createPresents() {
                   
     new Present({ x:'63%', y:'78%', width:'6rem', height:'4rem',
                   folder:'Charlie', style:'charlie-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
-                  triggerItems:[] }),
+                  triggerItems:[{song:'A Charlie Brown Christmas.mp3'}] }),
                   
     new Present({ x:'60%', y:'63%', width:'7.5rem', height:'5.5rem',
                   folder:'Movies', style:'film-reel-clean', hasLid:true, hasRibbon:false, ribbonStyle:'classic', locked:true,
