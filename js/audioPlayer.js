@@ -14,8 +14,8 @@ class AudioPlayer {
     this.playlist = [];
     this.songMap = {};
     this.currentIndex = 0;
-    this.hiddenSongs = hiddenSongs.map(name => name.replace(/\.mp3$/i, "")); // normalize hidden songs
-    this.firstSongs = (firstSongs || []).map(name => name.replace(/\.mp3$/i, "")); // normalize first songs
+    this.hiddenSongs = hiddenSongs.map(name => name.replace(/\.(mp3|m4a)$/i, "")); // normalize hidden songs
+    this.firstSongs = (firstSongs || []).map(name => name.replace(/\.(mp3|m4a)$/i, "")); // normalize first songs
 
     this.init();
 
@@ -54,14 +54,14 @@ class AudioPlayer {
   applyShuffleExcludingHidden() {
     // Exclude hidden songs
     this.playlist = this.playlist.filter(
-      song => !this.hiddenSongs.includes(song.replace(/\.mp3$/i, ""))
+      song => !this.hiddenSongs.includes(song.replace(/\.(mp3|m4a)$/i, ""))
     );
 
     // Separate first songs (if any) from the rest
     let firstSongsToPlay = [];
     if (this.firstSongs && this.firstSongs.length > 0) {
       this.playlist = this.playlist.filter(song => {
-        const normalized = song.replace(/\.mp3$/i, "");
+        const normalized = song.replace(/\.(mp3|m4a)$/i, "");
         if (this.firstSongs.includes(normalized)) {
           firstSongsToPlay.push(song);
           return false; // remove from main playlist
@@ -89,7 +89,7 @@ class AudioPlayer {
   buildSongMap() {
     this.songMap = {};
     this.playlist.forEach((filename, index) => {
-      const name = filename.replace(/\.mp3$/i, "");
+      const name = filename.replace(/\.(mp3|m4a)$/i, "");
       this.songMap[name] = index;
     });
   }
@@ -98,7 +98,7 @@ class AudioPlayer {
     this.dropdown.innerHTML = "";
 
     this.playlist.forEach((filename, index) => {
-      const name = filename.replace(/\.mp3$/i, "");
+      const name = filename.replace(/\.(mp3|m4a)$/i, "");
 
       const option = document.createElement("option");
       option.value = index;
@@ -144,7 +144,7 @@ class AudioPlayer {
   }
 
   playSongByName(name, addToDropdown = true) {
-    const key = name.replace(/\.mp3$/i, "");
+    const key = name.replace(/\.(mp3|m4a)$/i, "");
 
     // Already in songMap
     if (key in this.songMap) {
@@ -170,7 +170,7 @@ class AudioPlayer {
         const option = document.createElement("option");
         option.value = this.currentIndex;
 
-        const name = filename.replace(/\.mp3$/i, "");
+        const name = filename.replace(/\.(mp3|m4a)$/i, "");
         const displayName = name;
 
         option.textContent = displayName;
