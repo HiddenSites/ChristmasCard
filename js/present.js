@@ -187,7 +187,7 @@ function createPresents() {
   const presents = [
     new Present({ x:'29%', y:'75%', width:'5rem', height:'5rem',
                   folder:'Bass', style:'candy-cane-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
-                  triggerItems:[{song:'Rudy the Red Nosed Reindeer.m4a'}] }),
+                  triggerItems:[{song:'Rudy the Red Nosed Reindeer.mp3'}] }),
                   
     new Present({ x:'63%', y:'78%', width:'6rem', height:'4rem',
                   folder:'Charlie', style:'charlie-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
@@ -213,7 +213,7 @@ function createPresents() {
                   
     new Present({ x:'5%', y:'45%', width:'3rem', height:'10.5rem',
                   folder:'Grinch', style:'grinch-fur', hasLid:false, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
-                  triggerItems:[{song:'Mr Grinch'}] }),
+                  triggerItems:[{song:'Welcome Christmas'}] }),
                   
     new Present({ x:'19%', y:'53%', width:'8.5rem', height:'9rem',
                   folder:'Muppets', style:'muppets-confetti', hasLid:false, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
