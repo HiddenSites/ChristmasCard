@@ -97,6 +97,11 @@ function handleStart(e) {
   startX = e.touches ? e.touches[0].clientX : e.clientX;
 }
 
+function setControlsBackground(color) {
+  document.getElementById("audio-controls-container").style.background = color;
+  document.getElementById("snowSliderContainer").style.background = color;
+}
+
 
 function handleMove(e) {
 
@@ -111,9 +116,8 @@ function handleMove(e) {
   if (!cardOpen && diffX < -50) {
     card.classList.add("open");
     cardOpen = true;
-    const container = document.getElementById("audio-controls-container");
     const color = getComputedStyle(document.documentElement).getPropertyValue('--color-card-inside-bg');
-    container.style.background = color;
+    setControlsBackground(color);
     delayedStopFireplace();
 
     if (!cardOpened) {
@@ -128,9 +132,8 @@ function handleMove(e) {
   } else if (cardOpen && diffX > 50) {
     card.classList.remove("open");
     cardOpen = false;
-    const container = document.getElementById("audio-controls-container");
     const color = getComputedStyle(document.documentElement).getPropertyValue('--color-card-face-bg');
-    container.style.background = color;
+    setControlsBackground(color);
     startFireplace();
   }
 }
