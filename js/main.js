@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "Media/Audio/Music",
     ["Mele Kalikimaka.mp3", "Mr Grinch.mp3", "Rudolph.mp3", 
       "It Feels Like Christmas.mp3", "Alvin and the Chipmunks.mp3",
-      "Rudy the Red Nosed Reindeer.m4a", "A Charlie Brown Christmas.mp3"],  // these songs will always be last
+      "Rudy the Red Nosed Reindeer.m4a", "A Charlie Brown Christmas.mp3", "Santa Baby.mp3"],  // these songs will always be last
     ["All I Want For Christmas Is You.mp3", "Santa Tell Me.mp3"] // these songs will always be first
     );
 

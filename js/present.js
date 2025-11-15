@@ -9,6 +9,7 @@ class Present {
   static totalUnlocked = 0;
   static presents = [];
   static allPresentsOpened = false;
+  static bonusPresentSpawned = false;
 
   constructor({
     folder,
@@ -159,6 +160,7 @@ class Present {
     } else {
       Present.totalUnlocked--;
     }
+    Present.spawnBonusIfReady();
   }
 
   render(container) {
@@ -177,6 +179,47 @@ class Present {
     }
     else {
       return false;
+    }
+  }
+
+  static spawnBonusIfReady() {
+    // If already created, do nothing
+    if (bonusPresentSpawned) return;
+
+    // Trigger after X presents opened
+    const threshold = 3;
+
+    // Count how many have been opened (negative totalUnlocked means more opened than locked)
+    const openedCount = Math.abs(Present.totalUnlocked);
+
+    if (openedCount >= threshold) {
+        bonusPresentSpawned = true;
+
+        const container = document.getElementById('presents-container');
+
+        // Create the bonus present
+        const bonus = new Present({
+            x: '40%',
+            y: '20%',
+            width: '7rem',
+            height: '6rem',
+            folder: 'Bonus',
+            style: 'bonus-gold',   // you can create this CSS style
+            hasLid: true,
+            hasRibbon: true,
+            ribbonStyle: 'classic',
+            autoTransition: true,
+            triggerItems: [{song:'Santa Baby.mp3'}] // your random pictures go here
+        });
+
+        // Add pop-in animation class
+        bonus.element.classList.add('bonus-pop-in');
+
+        // Render it
+        bonus.render(container);
+
+        // Optional: show a message
+        Present.showMessage("🎁 Bonus present unlocked!");
     }
   }
 }
