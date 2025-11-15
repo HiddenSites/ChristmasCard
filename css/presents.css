@@ -565,6 +565,26 @@
   100% { left: 150%; }
 }
 
+.present.bonus-gold {
+  background: linear-gradient(135deg, #f5e08a, #d4b74a);
+  border: 3px solid #b89429;
+  box-shadow: 0 0 10px rgba(255, 223, 100, 0.7), 0 0 25px rgba(255, 223, 100, 0.4);
+}
+
+/* Bonus present pop-in animation */
+.bonus-pop-in {
+  animation: bonusPopIn 0.6s ease-out forwards;
+  transform: scale(0);
+  opacity: 0;
+}
+
+@keyframes bonusPopIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
 .message-box {
   position: fixed;
   top: 20px;
