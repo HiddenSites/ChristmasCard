@@ -160,7 +160,6 @@ class Present {
     } else {
       Present.totalUnlocked--;
     }
-    Present.spawnBonusIfReady();
   }
 
   render(container) {
@@ -168,6 +167,9 @@ class Present {
   }
 
   static checkAllOpened() {
+    if (Present.totalUnlocked == 0 && !Present.bonusPresentSpawned) {
+      Present.spawnBonus();
+    }
     if (Present.presents.length === 0) {
       Present.showMessage("You've opened all the presents! Now go open your real ones... or open these again.");
       for (let i = 0; i < 100; i++){
@@ -182,45 +184,35 @@ class Present {
     }
   }
 
-  static spawnBonusIfReady() {
-    // If already created, do nothing
-    if (bonusPresentSpawned) return;
+  static spawnBonus() {
 
-    // Trigger after X presents opened
-    const threshold = 3;
+      bonusPresentSpawned = true;
 
-    // Count how many have been opened (negative totalUnlocked means more opened than locked)
-    const openedCount = Math.abs(Present.totalUnlocked);
+      const container = document.getElementById('presents-container');
 
-    if (openedCount >= threshold) {
-        bonusPresentSpawned = true;
+      // Create the bonus present
+      const bonus = new Present({
+          x: '40%',
+          y: '20%',
+          width: '7rem',
+          height: '6rem',
+          folder: 'Bonus',
+          style: 'bonus-gold',   // you can create this CSS style
+          hasLid: true,
+          hasRibbon: true,
+          ribbonStyle: 'classic',
+          autoTransition: true,
+          triggerItems: [{song:'Santa Baby.mp3'}] // your random pictures go here
+      });
 
-        const container = document.getElementById('presents-container');
+      // Add pop-in animation class
+      bonus.element.classList.add('bonus-pop-in');
 
-        // Create the bonus present
-        const bonus = new Present({
-            x: '40%',
-            y: '20%',
-            width: '7rem',
-            height: '6rem',
-            folder: 'Bonus',
-            style: 'bonus-gold',   // you can create this CSS style
-            hasLid: true,
-            hasRibbon: true,
-            ribbonStyle: 'classic',
-            autoTransition: true,
-            triggerItems: [{song:'Santa Baby.mp3'}] // your random pictures go here
-        });
+      // Render it
+      bonus.render(container);
 
-        // Add pop-in animation class
-        bonus.element.classList.add('bonus-pop-in');
-
-        // Render it
-        bonus.render(container);
-
-        // Optional: show a message
-        Present.showMessage("🎁 Bonus present unlocked!");
-    }
+      // Optional: show a message
+      Present.showMessage("🎁 Bonus present unlocked!");
   }
 }
 
