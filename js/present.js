@@ -15,7 +15,7 @@ class Present {
     folder,
     locked = false,
     triggerItems = [],
-    autoTransition = false,
+    transitionState = TransitionState.NONE,
     style = 'classic-red',
     width = null,
     height = null,
@@ -34,7 +34,7 @@ class Present {
     this.folder = folder;
     this.locked = locked;
     this.triggerItems = triggerItems;
-    this.autoTransition = autoTransition;
+    this.transitionState = transitionState;
     this.style = style;
     this.width = width;
     this.height = height;
@@ -72,7 +72,7 @@ class Present {
 
     setTimeout(() => {
       if (box.parentNode) box.remove();
-    }, 5000);
+    }, 3000);
   }
 
   createElement() {
@@ -148,7 +148,7 @@ class Present {
 
   finishOpening() {
     if (typeof Gallery !== 'undefined' && Gallery.open) {
-      Gallery.open(this.folder, this.triggerItems, this.autoTransition);
+      Gallery.open(this.folder, this.triggerItems, this.transitionState);
     }
 
     this.element.remove();
@@ -167,7 +167,7 @@ class Present {
   }
 
   static checkAllOpened() {
-    if (Present.totalUnlocked == 0 && !Present.bonusPresentSpawned) {
+    if (Present.totalUnlocked === 0 && !Present.bonusPresentSpawned) {
       Present.spawnBonus();
     }
     if (Present.presents.length === 0) {
@@ -186,23 +186,22 @@ class Present {
 
   static spawnBonus() {
 
-      bonusPresentSpawned = true;
+      Present.bonusPresentSpawned = true;
 
       const container = document.getElementById('presents-container');
 
-      // Create the bonus present
       const bonus = new Present({
-          x: '40%',
-          y: '20%',
+          x: '33%',
+          y: '75%',
           width: '7rem',
           height: '6rem',
           folder: 'Bonus',
-          style: 'bonus-gold',   // you can create this CSS style
+          style: 'bonus-gold',
           hasLid: true,
           hasRibbon: true,
           ribbonStyle: 'classic',
-          autoTransition: true,
-          triggerItems: [{song:'Santa Baby.mp3'}] // your random pictures go here
+          transitionState: TransitionState.FULL,
+          triggerItems: [{song:'Santa Baby.mp3'}]
       });
 
       // Add pop-in animation class
@@ -212,7 +211,7 @@ class Present {
       bonus.render(container);
 
       // Optional: show a message
-      Present.showMessage("🎁 Bonus present unlocked!");
+      Present.showMessage("Here's a bonus present!");
   }
 }
 
@@ -221,11 +220,11 @@ function createPresents() {
 
   const presents = [
     new Present({ x:'29%', y:'75%', width:'5rem', height:'5rem',
-                  folder:'Bass', style:'candy-cane-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
+                  folder:'Bass', style:'candy-cane-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', transitionState:TransitionState.FIRST,
                   triggerItems:[{song:'Rudy the Red Nosed Reindeer.mp3'}] }),
                   
     new Present({ x:'63%', y:'78%', width:'6rem', height:'4rem',
-                  folder:'Charlie', style:'charlie-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
+                  folder:'Charlie', style:'charlie-stripes', hasLid:true, hasRibbon:true, ribbonStyle:'classic', transitionState:TransitionState.FIRST,
                   triggerItems:[{song:'A Charlie Brown Christmas.mp3'}] }),
                   
     new Present({ x:'60%', y:'63%', width:'7.5rem', height:'5.5rem',
@@ -243,15 +242,15 @@ function createPresents() {
                   triggerItems:[] }),
                   
     new Present({ x:'0%', y:'72%', width:'6rem', height:'5rem',
-                  folder:'Gremlin', style:'gremlin-splatter', hasLid:true, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
+                  folder:'Gremlin', style:'gremlin-splatter', hasLid:true, hasRibbon:true, ribbonStyle:'classic', transitionState:TransitionState.FIRST,
                   triggerItems:[] }),
                   
     new Present({ x:'5%', y:'45%', width:'3rem', height:'10.5rem',
-                  folder:'Grinch', style:'grinch-fur', hasLid:false, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
+                  folder:'Grinch', style:'grinch-fur', hasLid:false, hasRibbon:true, ribbonStyle:'classic', transitionState:TransitionState.FIRST,
                   triggerItems:[{song:'Welcome Christmas'}] }),
                   
     new Present({ x:'19%', y:'53%', width:'8.5rem', height:'9rem',
-                  folder:'Muppets', style:'muppets-confetti', hasLid:false, hasRibbon:true, ribbonStyle:'classic', autoTransition:true,
+                  folder:'Muppets', style:'muppets-confetti', hasLid:false, hasRibbon:true, ribbonStyle:'classic', transitionState:TransitionState.FIRST,
                   triggerItems:[{song:'It Feels Like Christmas.mp3'}] })
   ];
 

@@ -1,10 +1,17 @@
+
+const TransitionState = Object.freeze({
+  NONE: "none",
+  FIRST: "first",
+  FULL: "full"
+});
+
 class Gallery {
   static container = document.getElementById('gallery-container');
   static baseEncryptedFolder = 'Media/EncryptedPhotos'; // your root folder
   static currentFolder = null;
   static currentImages = []; // array of blob URLs or null placeholders for lazy load
   static currentIndex = 0;
-  static autoTransition = false;
+  static transitionState = TransitionState.NONE;
   static autoTransitionTimeoutId = null;
   static justOpened = true;
   // Configurable timing
@@ -32,10 +39,10 @@ class Gallery {
     });
   }
 
-  static async open(folder, triggerItems = [], autoTransition = false, preloadAllImages = false, wrapAround) {
+static async open(folder, triggerItems = [], transitionState = TransitionState.NONE, preloadAllImages = false, wrapAround){
     this.currentFolder = `${this.baseEncryptedFolder}/${folder}`;
     this.currentIndex = 0;
-    this.autoTransition = autoTransition;
+    this.transitionState = transitionState;
     this.preloadAllImages = preloadAllImages;
     this.wrapAround = wrapAround;
     this.triggerItems = triggerItems;
@@ -44,7 +51,7 @@ class Gallery {
     if (this.allPresentsOpened){
       this.wrapAround = true;
       this.justOpened = false;
-      this.autoTransition = false;
+      transitionState = TransitionState.NONE
     }
 
     // Play first trigger song that does not have a photo
@@ -89,14 +96,30 @@ class Gallery {
       this.showImage(0);
     }
 
-    // Auto transition first -> second image if enabled
-    if (this.autoTransition && this.currentImages.length > 1) {
-      this.isTransitioning = true;
-      this.autoTransitionTimeoutId = setTimeout(() => {
-        this.fadeToImage(1);
-      }, this.autoTransitionDelay);
-    } else {
-      this.setButtonsVisibility('visible');
+    // Auto-transition logic based on enum
+    switch (this.transitionState) {
+      case TransitionState.NONE:
+        this.setButtonsVisibility('visible');
+        break;
+
+      case TransitionState.FIRST:
+        if (this.currentImages.length > 1) {
+          this.isTransitioning = true;
+          this.autoTransitionTimeoutId = setTimeout(() => {
+            this.fadeToImage(1, true); // true = first-only
+          }, this.autoTransitionDelay);
+        }
+        break;
+
+      case TransitionState.FULL:
+        if (this.currentImages.length > 1) {
+          this.isTransitioning = true;
+          this.autoTransitionDelay = 5000;
+          this.autoTransitionTimeoutId = setTimeout(() => {
+            this.fadeToImage(1, false); 
+          }, this.autoTransitionDelay);
+        }
+        break;
     }
   }
 
@@ -228,7 +251,8 @@ class Gallery {
     }
   }
 
-  static fadeToImage(index) {
+  static fadeToImage(index, firstOnly = false) {
+
     // Remove any existing transitioning images besides the visible one
     const existingTransitionImgs = this.container.querySelectorAll('img.transitioning');
     existingTransitionImgs.forEach(img => img.remove());
@@ -294,6 +318,13 @@ class Gallery {
     })();
 
     this.currentIndex = index;
+    // Continue auto-transition if FULL mode
+    if (this.transitionState === TransitionState.FULL) {
+      this.autoTransitionTimeoutId = setTimeout(() => {
+        const nextIndex = (this.currentIndex + 1) % this.currentImages.length;
+        this.fadeToImage(nextIndex, false);
+      }, this.autoTransitionDelay);
+    }
   }
 
   static close() {
@@ -313,7 +344,7 @@ class Gallery {
     this.imagePaths = [];
     this.currentFolder = null;
     this.currentIndex = 0;
-    this.autoTransition = false;
+    this.transitionState = TransitionState.NONE;
     this.isTransitioning = false;
 
     cardSwipeEnabled = true;
