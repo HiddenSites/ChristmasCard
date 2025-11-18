@@ -114,7 +114,7 @@ static async open(folder, triggerItems = [], transitionState = TransitionState.N
       case TransitionState.FULL:
         if (this.currentImages.length > 1) {
           this.isTransitioning = true;
-          this.autoTransitionDelay = 5000;
+          this.autoTransitionDelay = 4000;
           this.autoTransitionTimeoutId = setTimeout(() => {
             this.fadeToImage(1, false); 
           }, this.autoTransitionDelay);
