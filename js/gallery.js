@@ -34,9 +34,15 @@ class Gallery {
     const prevBtn = this.container.querySelector('button.prev');
     const nextBtn = this.container.querySelector('button.next');
     const closeBtn = this.container.querySelector('button.close');
-    [prevBtn, nextBtn, closeBtn].forEach(btn => {
-      if (btn) btn.style.visibility = state;
-    });
+    if (!this.wrapAround && this.transitionState === TransitionState.FULL) {
+      closeBtn.style.visibility = state;
+    }
+    else{
+      [prevBtn, nextBtn, closeBtn].forEach(btn => {
+        if (btn) btn.style.visibility = state;
+      });
+    }
+  
   }
 
 static async open(folder, triggerItems = [], transitionState = TransitionState.NONE, preloadAllImages = false, wrapAround){
