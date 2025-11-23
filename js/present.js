@@ -181,7 +181,7 @@ class Present {
         spawnSnow();
       }
       Present.allPresentsOpened = true;
-      createAllPresents();
+      createPresents(true);
       return true;
     }
     else {
@@ -195,19 +195,7 @@ class Present {
 
       const container = document.getElementById('presents-container');
 
-      const bonus = new Present({
-          x: '33%',
-          y: '75%',
-          width: '7rem',
-          height: '6rem',
-          folder: 'Bonus',
-          style: 'bonus-gold',
-          hasLid: true,
-          hasRibbon: true,
-          ribbonStyle: 'classic',
-          transitionState: TransitionState.FULL,
-          triggerItems: [{song:'Santa Baby.mp3'}]
-      });
+      const bonus = createBonusPresent()
 
       // Add pop-in animation class
       bonus.element.classList.add('bonus-pop-in');
@@ -221,9 +209,23 @@ class Present {
 
   static spawnFinal() {
 
-  const container = document.getElementById('presents-container');
+    const container = document.getElementById('presents-container');
 
-  const bonus = new Present({
+    const bonus = createFinalPresent()
+
+    bonus.element.classList.add('bonus-pop-in');
+
+    bonus.render(container);
+    if (!Present.FinalPresentSpawned) {
+      Present.FinalPresentSpawned = true;
+      Present.showMessage("Here's a real present! What's in here is installed on our Xbox.");
+    }
+  }
+
+}
+
+function createFinalPresent(){
+  return new Present({
     x: '25%',
     y: '75%',
     width: '10rem',
@@ -236,19 +238,25 @@ class Present {
     transitionState: TransitionState.FULL,
     triggerItems: []
   });
-
-  bonus.element.classList.add('bonus-pop-in');
-
-  bonus.render(container);
-  if (!Present.FinalPresentSpawned) {
-    Present.FinalPresentSpawned = true;
-    Present.showMessage("Here's a real present! What's in here is installed on our Xbox.");
-  }
 }
 
+function createBonusPresent(){
+  return new Present({
+          x: '33%',
+          y: '75%',
+          width: '7rem',
+          height: '6rem',
+          folder: 'Bonus',
+          style: 'bonus-gold',
+          hasLid: true,
+          hasRibbon: true,
+          ribbonStyle: 'classic',
+          transitionState: TransitionState.FULL,
+          triggerItems: [{song:'Santa Baby.mp3'}]
+      });
 }
 
-function createPresents() {
+function createPresents(createAllPresents = false) {
   const presentsContainer = document.getElementById('presents-container');
 
   const presents = [
@@ -287,6 +295,11 @@ function createPresents() {
                   triggerItems:[{song:'It Feels Like Christmas.mp3'}] })
   ];
 
+  if (createAllPresents) {
+    presents.push(createBonusPresent());
+    presents.push(createFinalPresent());
+  }
+
   // First, render them in any order so they exist in the DOM
   presents.forEach(p => p.render(presentsContainer));
 
@@ -303,10 +316,4 @@ function createPresents() {
 
   presentsContainer.querySelectorAll('.present').forEach(el => el.remove());
   presents.forEach(p => presentsContainer.appendChild(p.element));
-}
-
-function createAllPresents(){
-  spawnBonus();
-  spawnFinal();
-  createPresents();
 }
