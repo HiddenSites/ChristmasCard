@@ -88,8 +88,9 @@ static async open(folder, triggerItems = [], transitionState = TransitionState.N
       if (!this.isTransitioning) this.close();
     };
 
-    // Setup swipe handlers for mobile
-    this.setupSwipeHandlers();
+    if (!(!this.wrapAround && this.transitionState === TransitionState.FULL)) {
+      this.setupSwipeHandlers();
+    }
 
     // Hide buttons initially, they'll be shown after image is loaded/faded
     this.setButtonsVisibility('hidden');
