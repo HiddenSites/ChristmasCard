@@ -10,6 +10,7 @@ class Present {
   static presents = [];
   static allPresentsOpened = false;
   static bonusPresentSpawned = false;
+  static FinalPresentSpawned = false;
 
   constructor({
     folder,
@@ -52,7 +53,7 @@ class Present {
     this.addListeners();
   }
 
-  static showMessage(message) {
+  static showMessage(message, timeOut = 3000) {
     const existing = document.querySelector('.message-box');
     if (existing) existing.remove();
 
@@ -72,7 +73,7 @@ class Present {
 
     setTimeout(() => {
       if (box.parentNode) box.remove();
-    }, 3000);
+    }, timeOut);
   }
 
   createElement() {
@@ -171,12 +172,16 @@ class Present {
       Present.spawnBonus();
     }
     if (Present.presents.length === 0) {
+      if (!Present.FinalPresentSpawned) {
+        Present.spawnFinal();
+        return false;
+      }
       Present.showMessage("You've opened all the presents! Now go open your real ones... or open these again.");
       for (let i = 0; i < 100; i++){
         spawnSnow();
       }
       Present.allPresentsOpened = true;
-      createPresents();
+      createAllPresents();
       return true;
     }
     else {
@@ -213,6 +218,34 @@ class Present {
       // Optional: show a message
       Present.showMessage("Here's a bonus present!");
   }
+
+  static spawnFinal() {
+
+  const container = document.getElementById('presents-container');
+
+  const bonus = new Present({
+    x: '25%',
+    y: '75%',
+    width: '10rem',
+    height: '3rem',
+    folder: 'Final',
+    style: 'final-gaming-glow',
+    hasLid: true,
+    hasRibbon: true,
+    ribbonStyle: 'classic',
+    transitionState: TransitionState.FULL,
+    triggerItems: []
+  });
+
+  bonus.element.classList.add('bonus-pop-in');
+
+  bonus.render(container);
+  if (!Present.FinalPresentSpawned) {
+    Present.FinalPresentSpawned = true;
+    Present.showMessage("Here's a real present! What's in here is installed on our Xbox.");
+  }
+}
+
 }
 
 function createPresents() {
@@ -270,4 +303,10 @@ function createPresents() {
 
   presentsContainer.querySelectorAll('.present').forEach(el => el.remove());
   presents.forEach(p => presentsContainer.appendChild(p.element));
+}
+
+function createAllPresents(){
+  spawnBonus();
+  spawnFinal();
+  createPresents();
 }
