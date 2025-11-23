@@ -88,9 +88,8 @@ static async open(folder, triggerItems = [], transitionState = TransitionState.N
       if (!this.isTransitioning) this.close();
     };
 
-    if (!(!this.wrapAround && this.transitionState === TransitionState.FULL)) {
-      this.setupSwipeHandlers();
-    }
+    // Setup swipe handlers for mobile
+    this.setupSwipeHandlers();
 
     // Hide buttons initially, they'll be shown after image is loaded/faded
     this.setButtonsVisibility('hidden');
@@ -376,6 +375,7 @@ static async open(folder, triggerItems = [], transitionState = TransitionState.N
 
     this.container.addEventListener('touchend', e => {
       if (!isMoving) return;
+      if (!this.wrapAround && this.transitionState === TransitionState.FULL) return
       isMoving = false;
       let dx = e.changedTouches[0].clientX - startX;
       let dy = e.changedTouches[0].clientY - startY;
