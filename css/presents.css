@@ -615,6 +615,35 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* =============================== */
+/*   FINAL GAMING BONUS PRESENT    */
+/* =============================== */
+
+.present.final-gaming-glow {
+  /* Required theme variables */
+  --present-color: linear-gradient(145deg, #0a0f1c, #0f1d33);
+  --lid-color: linear-gradient(145deg, #10182c, #0a1223);
+  --ribbon-color: rgba(0, 255, 120, 0.9);
+  --border-radius: 0.2rem;
+
+  position: relative;
+  box-shadow:
+    0 0 20px rgba(0, 255, 140, 0.4),
+    inset 0 0 10px rgba(0, 255, 120, 0.2);
+}
+
+/* Lid glow */
+.present.final-gaming-glow.has-lid .lid {
+  box-shadow:
+    0 0 20px rgba(0, 255, 140, 0.4),
+    inset 0 0 10px rgba(0, 255, 120, 0.2);
+}
+
+.present.final-gaming-glow .ribbon {
+  background: var(--ribbon-color);
+  filter: drop-shadow(0 0 6px rgba(0, 255, 120, 1));
+}
+
 .message-box {
   position: fixed;
   top: 20px;
