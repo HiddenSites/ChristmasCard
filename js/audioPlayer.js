@@ -1,4 +1,5 @@
 const CHARLIMIT = 25;
+lockInsert = false;
 
 class AudioPlayer {
   constructor(audioSelector, nextBtnSelector, dropdownSelector, playlistUrl, basePath, hiddenSongs = [], firstSongs = null) {
@@ -14,8 +15,8 @@ class AudioPlayer {
     this.playlist = [];
     this.songMap = {};
     this.currentIndex = 0;
-    this.hiddenSongs = hiddenSongs.map(name => name.replace(/\.(mp3|m4a)$/i, "")); // normalize hidden songs
-    this.firstSongs = (firstSongs || []).map(name => name.replace(/\.(mp3|m4a)$/i, "")); // normalize first songs
+    this.hiddenSongs = hiddenSongs.map(name => name.replace(/\.mp3$/i, "")); // normalize hidden songs
+    this.firstSongs = (firstSongs || []).map(name => name.replace(/\.mp3$/i, "")); // normalize first songs
 
     this.init();
 
@@ -54,14 +55,14 @@ class AudioPlayer {
   applyShuffleExcludingHidden() {
     // Exclude hidden songs
     this.playlist = this.playlist.filter(
-      song => !this.hiddenSongs.includes(song.replace(/\.(mp3|m4a)$/i, ""))
+      song => !this.hiddenSongs.includes(song.replace(/\.mp3$/i, ""))
     );
 
     // Separate first songs (if any) from the rest
     let firstSongsToPlay = [];
     if (this.firstSongs && this.firstSongs.length > 0) {
       this.playlist = this.playlist.filter(song => {
-        const normalized = song.replace(/\.(mp3|m4a)$/i, "");
+        const normalized = song.replace(/\.mp3$/i, "");
         if (this.firstSongs.includes(normalized)) {
           firstSongsToPlay.push(song);
           return false; // remove from main playlist
@@ -89,7 +90,7 @@ class AudioPlayer {
   buildSongMap() {
     this.songMap = {};
     this.playlist.forEach((filename, index) => {
-      const name = filename.replace(/\.(mp3|m4a)$/i, "");
+      const name = filename.replace(/\.mp3$/i, "");
       this.songMap[name] = index;
     });
   }
@@ -98,7 +99,7 @@ class AudioPlayer {
     this.dropdown.innerHTML = "";
 
     this.playlist.forEach((filename, index) => {
-      const name = filename.replace(/\.(mp3|m4a)$/i, "");
+      const name = filename.replace(/\.mp3$/i, "");
 
       const option = document.createElement("option");
       option.value = index;
@@ -133,6 +134,9 @@ class AudioPlayer {
     this.audio.src = `${this.basePath}/${filename}`;
     this.dropdown.value = index;
 
+    console.log("🎵 Playing song:", filename);
+    console.log("📜 Current playlist:", this.playlist);
+
     const playPromise = this.audio.play();
     if (playPromise !== undefined) {
       playPromise.catch(err => {
@@ -144,46 +148,44 @@ class AudioPlayer {
   }
 
   playSongByName(name, addToDropdown = true) {
-    const key = name.replace(/\.(mp3|m4a)$/i, "");
+    const key = name.replace(/\.mp3$/i, "");
 
-    // Already in songMap
+    // If already in songMap
     if (key in this.songMap) {
       this.currentIndex = this.songMap[key];
+      console.log("▶️ Hidden song already in playlist, playing:", name);
       this.playSong(this.currentIndex);
       return;
     }
 
     // Check hidden songs
     const hiddenIndex = this.hiddenSongs.findIndex(f => f === key);
-    if (hiddenIndex !== -1) {
-      const filename = this.hiddenSongs[hiddenIndex]  + ".mp3";
-
-      // Add to playlist
-      this.playlist.push(filename);
-      this.currentIndex = this.playlist.length - 1;
-
-      // Add to songMap
-      this.songMap[key] = this.currentIndex;
-
-      // Optionally add to dropdown
-      if (addToDropdown) {
-        const option = document.createElement("option");
-        option.value = this.currentIndex;
-
-        const name = filename.replace(/\.(mp3|m4a)$/i, "");
-        const displayName = name;
-
-        option.textContent = displayName;
-        this.dropdown.appendChild(option);
-
-        option.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        this.dropdown.value = this.currentIndex;
-      }
-
-      this.playSong(this.currentIndex);
-    } else {
+    if (hiddenIndex === -1) {
       console.warn(`Song "${name}" not found.`);
+      return;
     }
+
+    const filename = this.hiddenSongs[hiddenIndex] + ".mp3";
+
+    // 1. INSERT hidden song AFTER the current one
+    const insertIndex = this.currentIndex + 1;
+    this.playlist.splice(insertIndex, 0, filename);
+
+    console.log("➕ Inserted hidden song:", filename, "at index", insertIndex);
+    console.log("📜 Playlist after insertion:", this.playlist);
+
+    // 2. REBUILD songMap from scratch
+    this.buildSongMap();
+
+    // 3. Rebuild dropdown so UI matches playlist exactly
+    if (addToDropdown) {
+      this.populateDropdown();
+      this.dropdown.value = insertIndex;
+    }
+
+    // 4. Play the newly inserted track
+    this.currentIndex = insertIndex;
+    this.playSong(this.currentIndex);
   }
 
   play() {

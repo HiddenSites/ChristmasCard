@@ -226,7 +226,7 @@ class Present {
 
 function createFinalPresent(){
   return new Present({
-    x: '25%',
+    x: '23%',
     y: '75%',
     width: '10rem',
     height: '3rem',
@@ -243,7 +243,7 @@ function createFinalPresent(){
 function createBonusPresent(){
   return new Present({
           x: '33%',
-          y: '75%',
+          y: '73%',
           width: '7rem',
           height: '6rem',
           folder: 'Bonus',
