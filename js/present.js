@@ -125,7 +125,7 @@ class Present {
     this.element.addEventListener('click', () => {
       if (this.locked) {
         if (Present.totalUnlocked > 0) {
-          Present.showMessage("Save your best presents for last, open the other ones first!");
+          Present.showMessage("Save your best presents for last, open the other ones first!", 3000);
           return;
         } else {
           this.locked = false;
@@ -176,7 +176,7 @@ class Present {
         Present.spawnFinal();
         return false;
       }
-      Present.showMessage("You've opened all the presents! Now go open your real ones... or open these again.");
+      Present.showMessage("You've opened all the presents! Now go open your real ones... or open these again.",4000);
       for (let i = 0; i < 100; i++){
         spawnSnow();
       }
@@ -204,7 +204,7 @@ class Present {
       bonus.render(container);
 
       // Optional: show a message
-      Present.showMessage("Here's a bonus present!");
+      Present.showMessage("Here's a bonus present!", 2500);
   }
 
   static spawnFinal() {
@@ -218,7 +218,7 @@ class Present {
     bonus.render(container);
     if (!Present.FinalPresentSpawned) {
       Present.FinalPresentSpawned = true;
-      Present.showMessage("Here's a real present! What's in here is installed on our Xbox.");
+      Present.showMessage("Here's a real present! What's in here is installed on our Xbox.", 5000);
     }
   }
 
