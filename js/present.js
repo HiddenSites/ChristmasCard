@@ -251,7 +251,7 @@ function createBonusPresent(){
           hasLid: true,
           hasRibbon: true,
           ribbonStyle: 'classic',
-          transitionState: TransitionState.FULL,
+          transitionState: TransitionState.NONE,
           triggerItems: [{song:'Santa Baby.mp3'}]
       });
 }
@@ -316,4 +316,5 @@ function createPresents(createAllPresents = false) {
 
   presentsContainer.querySelectorAll('.present').forEach(el => el.remove());
   presents.forEach(p => presentsContainer.appendChild(p.element));
+
 }
